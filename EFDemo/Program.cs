@@ -360,13 +360,78 @@ namespace EFDemo
                 //    }
                 //}
 
-         
 
-                //IEnumerable<IGrouping<int, Product>> groups =
-                //       from product in context.Products.ToList()
-                //       group product by CheckPrice(product.Price);
-                 
-                Console.ReadLine();
+
+                //IEnumerable<IGrouping<string, Product>> groups =
+                //    from product in context.Products
+                //    group product by product.Category.Name into cgroup
+                //    orderby cgroup.Key descending
+                //    select cgroup;
+                //foreach (IGrouping<string, Product> group in groups) 
+                //{
+                //    Console.WriteLine(group.Key);
+                //    foreach (Product product in group)
+                //        Console.WriteLine("\t{0}\t價格:{1}", product.Name, product.Price);
+                //}
+
+                //SPList<Product> products = new SPList<Product> { 
+                //     new Product()
+                //     {Id=1000,Name ="BOOKX01",Price=900,Category ="Book"},
+                //        new Product()
+                //     {Id=1001,Name ="BOOKX02",Price=700,Category ="Book"},
+                //        new Product()
+                //     {Id=1002,Name ="BOOKX03",Price=800,Category ="Book"},
+                //};
+                //Console.WriteLine(products.Average(p => p.Price));
+                //Console.WriteLine(products.AsEnumerable().Average(p => p.Price));
+
+                //List<string> weekDay = new List<string> { "Monday", "Tuesday", "Wendnesday", "Thursday", "Friday", "Saturday", "Sunday" };
+                //string[] weekDayArray = weekDay.ToArray();
+                //for (int i = 0; i < weekDayArray.Length; i++) 
+                //{
+                //    Console.Write("{0} ", weekDayArray[i]);
+                //}
+                //Console.WriteLine();
+
+                //List<string> weekDayList = weekDayArray.ToList();
+                //foreach (string day in weekDayList) 
+                //{
+                //    Console.Write("{0} ", day);
+                //}
+                //IQueryable<Product> query = from product in context.Products
+                //                           select product;
+
+                //var list = from product in query.ToList()
+                //           where checkPrice(product.Price)
+                //           select product;
+                //Console.WriteLine("定價超過1500的品項數:{0}", list.Count());
+
+                //string[] list = (from product in context.Products
+                //                 select product.Name).ToArray();
+                //for (int i = 0; i < list.Length; i++)
+                //    Console.WriteLine(list[i]);
+
+                List<string> listBooks = new List<string> { 
+                
+                   "ASP.NET MVC入門",
+                   "React 實務",
+                   "Entity Framework實務精要",
+                   "前端開發完全入門",
+                   "ASP.NET 專業開發"
+                };
+                int indexValue = 0;
+                Dictionary<string, string> booksDictionary =
+                     listBooks.ToDictionary(
+                     keyValue => "book-" +
+                         (indexValue++).ToString()
+                     );
+                foreach (KeyValuePair<string, string> kvp
+                    in booksDictionary)
+                {
+                    Console.WriteLine("{0}\t{1}", kvp.Key, kvp.Value);
+                }
+
+                Console.Read();
             }
 
 
@@ -384,14 +449,21 @@ namespace EFDemo
         //    bool b = price > 800 && price <= 1600;
         //    return b;
         //}
-        static int CheckPrice(int Price) 
+        //static int CheckPrice(int Price) 
+        //{
+        //    if (Price > 2000)
+        //        return 3000;
+        //    else if (Price >= 1000 && Price <= 2000)
+        //        return 2000;
+        //    else
+        //        return 1000;
+        //}
+        static bool checkPrice(int price) 
         {
-            if (Price > 2000)
-                return 3000;
-            else if (Price >= 1000 && Price <= 2000)
-                return 2000;
+            if (price > 1500)
+                return true;
             else
-                return 1000;
+                return false;
         }
         private static bool CheckEven(int nvalue) 
         {
@@ -420,4 +492,57 @@ namespace EFDemo
         public double SPrice { get; set; }
 
     }
+
+    //class Product 
+    //{
+    //    public int Id { get; set; }
+    //    public string Name { get; set; }
+
+    //    public int Price { get; set; }
+
+    //    public string Category { get; set; }
+    //}
+    //class SPList<T> : List<T> 
+    //{
+    //    public decimal Average(Func<T, decimal> s) 
+    //    {
+    //        var list = (List<T>)this;
+    //        decimal price = list.Average(s) * decimal.Parse("0.8");
+    //        return price;
+    //    }
+    //}
 }
+
+  //context.Products.Add(new Product { Name = "ASP.NET MVC 商業應用開發實務", Price = 850 , Category_Id = 1 }); 
+  //context.Products.Add(new Product { Name = "Entity Framework 實務精要", Price = 800	, Category_Id = 1 }); 
+  //context.Products.Add(new Product { Name = "HTML 5從零開始", Price = 550	, Category_Id = 1 }); 
+  //context.Products.Add(new Product { Name = "HTML 5完美風暴", Price = 1000, Category_Id = 1 }); 
+  //context.Products.Add(new Product { Name = "Entity Framework 與 LINQ 開發實戰", Price = 590	, Category_Id = 1 }); 
+  //context.Products.Add(new Product { Name = "ASP.net 商業級資料庫網站開發實務", Price = 650	, Category_Id = 1 }); 
+  //context.Products.Add(new Product { Name = "Visual C#精要剖析", Price = 520	, Category_Id = 1 }); 
+  //context.Products.Add(new Product { Name = "3U工業用機殼", Price = 4000, Category_Id = 2 }); 
+  //context.Products.Add(new Product { Name = "CUP散熱器 MITX", Price = 950	, Category_Id = 2 }); 
+  //context.Products.Add(new Product { Name = "四熱管多合一CPU風扇", Price = 980	, Category_Id = 2 }); 
+  //context.Products.Add(new Product { Name = "PC RS 232 擴充卡", Price = 1020, Category_Id = 2 }); 
+  //context.Products.Add(new Product { Name = "ASUC 變壓器	", Price = 3600, Category_Id = 2 }); 
+  //context.Products.Add(new Product { Name = "8 PORT USB充電器", Price = 1620, Category_Id = 2 }); 
+  //context.Products.Add(new Product { Name = "8 PORT USB充電器", Price = 1620, Category_Id = 2 }); 
+  //context.Products.Add(new Product { Name = "鋁殼2400米傳輸線", Price = 2500, Category_Id = 3 }); 
+  //context.Products.Add(new Product { Name = "行動電源超薄型 85000mAh", Price = 500	, Category_Id = 3 }); 
+  //context.Products.Add(new Product { Name = "行動電源USB離子電芯", Price = 1800, Category_Id = 3 }); 
+  //context.Products.Add(new Product { Name = "手機Shap離電池", Price = 1600, Category_Id = 3 }); 
+  //context.Products.Add(new Product { Name = "AC轉USB充電器", Price = 280	, Category_Id = 3 }); 
+  //context.Products.Add(new Product { Name = "USB復古4吋風扇", Price = 850	, Category_Id = 4 }); 
+  //context.Products.Add(new Product { Name = "LED燈 B-LED	", Price = 250	, Category_Id = 4 }); 
+  //context.Products.Add(new Product { Name = "USB 3.0 共享傳輸線", Price = 1500, Category_Id = 4 }); 
+  //context.Products.Add(new Product { Name = "USB 3.0 18 HUB", Price = 1450, Category_Id = 4 }); 
+  //context.Products.Add(new Product { Name = "7 Port USB充電器", Price = 2250, Category_Id = 4 });
+
+
+//context.Categorys.Add(new Category { Id =  1, Name = "Book" });
+//context.Categorys.Add(new Category { Id =  2, Name = "PC" });
+//context.Categorys.Add(new Category { Id =  3, Name = "Mobile" });
+//context.Categorys.Add(new Category { Id =  4, Name = "USB" });
+
+
+
