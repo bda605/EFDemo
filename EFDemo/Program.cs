@@ -411,26 +411,72 @@ namespace EFDemo
                 //for (int i = 0; i < list.Length; i++)
                 //    Console.WriteLine(list[i]);
 
-                List<string> listBooks = new List<string> { 
+                //List<string> listBooks = new List<string> { 
                 
-                   "ASP.NET MVC入門",
-                   "React 實務",
-                   "Entity Framework實務精要",
-                   "前端開發完全入門",
-                   "ASP.NET 專業開發"
-                };
-                int indexValue = 0;
-                Dictionary<string, string> booksDictionary =
-                     listBooks.ToDictionary(
-                     keyValue => "book-" +
-                         (indexValue++).ToString()
-                     );
-                foreach (KeyValuePair<string, string> kvp
-                    in booksDictionary)
-                {
-                    Console.WriteLine("{0}\t{1}", kvp.Key, kvp.Value);
-                }
+                //   "ASP.NET MVC入門",
+                //   "React 實務",
+                //   "Entity Framework實務精要",
+                //   "前端開發完全入門",
+                //   "ASP.NET 專業開發"
+                //};
+                //int indexValue = 0;
+                //Dictionary<string, string> booksDictionary =
+                //     listBooks.ToDictionary(
+                //     keyValue => "book-" +
+                //         (indexValue++).ToString()
+                //     );
+                //foreach (KeyValuePair<string, string> kvp
+                //    in booksDictionary)
+                //{
+                //    Console.WriteLine("{0}\t{1}", kvp.Key, kvp.Value);
+                //}
 
+                //IQueryable<Product> products =
+                //    from product in context.Products
+                //    select product;
+                //Dictionary<string, Product> directory =
+                //    products.ToDictionary(
+                //    key => key.Category_Id + "_" + key.Id);
+                //foreach (KeyValuePair<string, Product> key in directory)
+                //{
+                //    Console.WriteLine("{0}\t{1}", key.Key, key.Value.Name);
+                //}
+
+                //List<string> listBooks = new List<string> { 
+
+                //   "ASP.NET MVC入門",
+                //   "React 實務",
+                //   "Entity Framework實務精要",
+                //   "前端開發完全入門",
+                //   "ASP.NET 專業開發"
+                //};
+
+                //int i = 0;
+                //ILookup<string, string> lookup =
+                //    listBooks.ToLookup(key => "book");
+                //foreach (IGrouping<string, string> igp in lookup) 
+                //{
+                //    Console.WriteLine("{0}", igp.Key);
+                //    foreach (string str in igp)
+                //        Console.WriteLine(" " + str);
+                //}
+
+                //IQueryable<Product> products =
+                //    from product in context.Products
+                //    select product;
+                //ILookup<string, Product> look =
+                //    products.ToLookup(
+                //    key => key.Category_Id.ToString()
+                //    );
+                //foreach (IGrouping<string, Product> group in look) 
+                //{
+                //    Console.WriteLine("\n{0}", group.Key);
+                //    foreach (Product product in group) 
+                //    {
+                //        Console.WriteLine(" {0}\t{1}", product.Id,
+                //            product.Name);
+                //    }
+                //}
                 Console.Read();
             }
 
