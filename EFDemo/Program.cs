@@ -136,8 +136,8 @@ namespace EFDemo
                 //Console.Read();
                 // }
 
-            using (var context = new KTStoreModel()) 
-            {
+            //using (var context = new KTStoreModel()) 
+            //{
                 //var products = from product in context.Products
                 //               select product;
                 //foreach (Product product in products) 
@@ -477,13 +477,122 @@ namespace EFDemo
                 //            product.Name);
                 //    }
                 //}
-                Console.Read();
+
+                // Console.Read();
+            //}
+
+            //var t = RunAsyncQuery();
+            //Console.WriteLine("資料開始截取...");
+
+            //Task<List<Product>> ps = RunAsyncQueryP();
+            //Console.WriteLine("資料開始截取..\n");
+            //List<Product> products = ps.Result;
+            //foreach (Product p in products)
+            //    Console.WriteLine("{0}\t{1}", p.Id, p.Name);
+            //Console.ReadKey();
+
+            //var cbooks =
+            //    from c in categories
+            //    join b in books on
+            //    c.Id equals b.CategoryId
+            //    select new { 
+            //        BookCategory = c.Name,
+            //        BookTitle = b.Name
+            //    };
+            //foreach (var book in cbooks)
+            //    Console.WriteLine("書籍分類:{0}\t書名:{1}", book.BookCategory.PadLeft(8), book.BookTitle);
+
+
+            using (var context = new KTStoreModel()) 
+            {
+                //var products = from category in context.Categorys
+                //               join product in context.Products on
+                //               category.Id equals product.Category_Id
+                //               select new
+                //               {
+                //                   Category = category.Name,
+                //                   Product = product.Name,
+                //                   Price = product.Price
+                //               };
+                //foreach (var cp in products)
+                //    Console.WriteLine("分類:{0}\t{1}\t價格:{2}:", cp.Category, cp.Product, cp.Price);
+                //int n = 1;
+                //IEnumerable<IEnumerable<Product>> pgroup =
+                //    from category in context.Categorys
+                //    join product in context.Products on
+                //    category.Id equals product.Category_Id
+                //    into productgroup
+                //    select productgroup;
+                //foreach (var products in pgroup)
+                //{
+                //    Console.WriteLine("\n分類{0} 資料筆數:{1}\n", n, products.Count());
+                //    foreach (var product in products)
+                //        Console.WriteLine("\t{0}", product.Name);
+                //    n++;
+                //}
+
+                IEnumerable<GCProduct> pgroup =
+                    from category in context.Categorys
+                    join product in context.Products on
+                    category.Id equals product.Category_Id
+                    into productgroup
+                    select new GCProduct() 
+                    {
+                       CategoryName = category.Name,
+                       Products = productgroup
+                    };
+                foreach (var category in pgroup)
+                {
+                    Console.WriteLine("\n{0}:{1}\n", category.CategoryName, category.Products.Count());
+                    foreach (var product in category.Products) 
+                    {
+                        Console.WriteLine("{0}", product.Name);
+                    }
+                }
             }
-
-
-          
-              
+            Console.ReadKey();
+           
         }
+        public class GCProduct 
+        {
+            public string CategoryName { get; set; }
+            public IEnumerable<Product> Products { get; set; }
+        }
+         // static List<Category> categories = new List<Category>()
+         //{
+         //   new Category() {Name="ASP.NET",Id=001},
+         //   new Category() {Name=".NET",Id=002},
+         //   new Category() {Name="WEB",Id=003}
+         //};
+         // static List<Book> books = new List<Book>()
+         // {
+         //       new Book(){Name = "ASP.NET MVC開發實務",CategoryId=001},
+         //       new Book(){Name = "ASP.NET MVC實務精要",CategoryId=001},
+         //       new Book(){Name = "EF實務精要",CategoryId=002},
+         //       new Book(){Name = "C#實務精要",CategoryId=002},
+         //       new Book(){Name = "HTML5從零開始",CategoryId=003},
+         //       new Book(){Name = "HTML5完美風暴",CategoryId=003},
+         // };
+        //static async Task RunAsyncQuery()
+        //{
+        //    using (var context = new KTStoreModel())
+        //    {
+        //        //var products = await context.Products.ToListAsync();
+        //        //foreach (var product in products)
+        //        //    Console.WriteLine(product.Name);
+        //        await context.Products.ForEachAsync(product => {
+        //            Console.WriteLine(product.Name);
+        //        });
+        //    }
+        //}
+        //static async Task<List<Product>> RunAsyncQueryP() 
+        //{
+        //    using (var context = new KTStoreModel())
+        //    {
+        //        var products = await context.Products.ToListAsync();
+        //        return products;
+        //    }
+        //}
         static int checkMonth(int month) 
         {
             int resultDays;
@@ -539,6 +648,18 @@ namespace EFDemo
 
     }
 
+    class Book 
+    {
+        public string Name { get; set; }
+        public int CategoryId { get; set; }
+
+    }
+    class Category
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+
+    }
     //class Product 
     //{
     //    public int Id { get; set; }
