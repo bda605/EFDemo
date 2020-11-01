@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EFDemo.Model
 {
-    public class Category
+    [Table("Categories")]
+    public partial class Category
     {
+        public Category() => Products = new HashSet<Product>();
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Product> Product { get; set; }
-
+        public virtual ICollection<Product> Products { get; set; }
+       
     }
 }
