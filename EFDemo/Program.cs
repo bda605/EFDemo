@@ -1166,17 +1166,17 @@ namespace EFDemo
 
                 //elementSingle = weekDays.SingleOrDefault(s => s.Substring(0, 3) == "wwk");
                 //Console.WriteLine(elementSingle);
-                IEnumerable<Category> categories =
-                    from category in context.Categorys
-                    select category;
-                foreach (var c in categories)
-                {
-                    Console.WriteLine(c.Name);
-                    foreach (var p in c.Products)
-                    {
-                        Console.WriteLine($"\t{p.Name}");
-                    }
-                }
+                //IEnumerable<Category> categories =
+                //    from category in context.Categorys
+                //    select category;
+                //foreach (var c in categories)
+                //{
+                //    Console.WriteLine(c.Name);
+                //    foreach (var p in c.Products)
+                //    {
+                //        Console.WriteLine($"\t{p.Name}");
+                //    }
+                //}
             }
 
          
